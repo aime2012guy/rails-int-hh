@@ -15,7 +15,7 @@ class ReservationTest < ActiveSupport::TestCase
 
     reservation = Factory(:reservation, state: 'reserved')
     copy = Factory.build(:reservation, reservation.attributes)
-    #copy = Reservation.new(reservation.attributes)
+    copy = Reservation.new(reservation.attributes)
     assert !copy.save
     assert_match /book has been already reserved/, copy.errors[:book_id].join
   end

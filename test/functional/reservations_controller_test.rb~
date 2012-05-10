@@ -9,7 +9,15 @@ class ReservationsControllerTest < ActionController::TestCase
     @reservation   = Factory(:reservation, book: @reserved_book, state: 'reserved', user: @user)
     login_as(@user)
   end
-
+  
+  test "create reservation with valid parameters" do
+    assert_difference("Reservation.count", +1) do
+      post :create, book_id: @book.id
+      assert_response :redirect
+      assert_redirected_to book_path(@book)
+      assert flash[:notice]
+    end
+  end
 
   test "create reservation with valid parameters" do
     assert_difference("Reservation.count", +1) do

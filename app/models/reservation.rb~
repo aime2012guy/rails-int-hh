@@ -18,8 +18,7 @@ class Reservation < ActiveRecord::Base
   belongs_to :user
   
   def free
-    self.state = 'free'
-    self.save
+    self.update_attributes({state: 'free'})
   end
   
   
